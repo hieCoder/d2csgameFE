@@ -6,7 +6,7 @@ export default function Home() {
             <h1 className="text-4xl font-bold mb-4 text-gray-800">
                 Welcome to My Game Store
             </h1>
-            <Button className="bg-blue-500 text-white px-6 py-3 rounded-lg">
+            <Button className="bg-blue-500 text-white px-6 py-3 rounded-lg transition ease-in-out duration-500 ">
                 Start Shopping
             </Button>
         </div>

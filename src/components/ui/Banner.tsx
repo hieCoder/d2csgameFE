@@ -7,7 +7,7 @@ export default function Banner() {
       {/* Two Banners Side-by-Side */}
       <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
         {/* First Banner (30% width on medium screens and up) */}
-        <div className="md:col-span-3 bg-orange-100 p-6 rounded-lg flex flex-col items-center">
+        <div className="md:col-span-3 bg-orange-100 p-4 rounded-lg flex flex-col items-center">
           {/* Images Section */}
           <div className="flex flex-col gap-4 w-full">
             {Array.from({ length: 4 }, (_, index) => (
@@ -24,7 +24,7 @@ export default function Banner() {
         </div>
 
         {/* Second Banner (70% width on medium screens and up) */}
-        <div className="md:col-span-7 bg-blue-100 p-6 rounded-lg">
+        <div className="md:col-span-7 bg-blue-100 p-4 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Large Image */}
             <div className="md:col-span-2 flex flex-col items-center relative">

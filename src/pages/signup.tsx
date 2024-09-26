@@ -12,36 +12,47 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
 
-// Assuming you have a loginUser action in your Redux store
-// import { loginUser } from "@/store/authSlice";
+// Assuming you have a registerUser action in your Redux store
+// import { registerUser } from "@/store/authSlice";
 
-export default function LoginPage() {
+export default function SignUp() {
     const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     // const dispatch = useDispatch();
+    const { toast } = useToast();
 
-    // const handleLogin = (e: React.FormEvent) => {
+    // const handleRegister = (e: React.FormEvent) => {
     //     e.preventDefault();
-    //     dispatch(loginUser({ email, password }));
+    //     if (password !== confirmPassword) {
+    //         toast({
+    //             title: "Error",
+    //             description: "Passwords do not match",
+    //             variant: "destructive",
+    //         });
+    //         return;
+    //     }
+    //     dispatch(registerUser({ email, username, password }));
     // };
 
     return (
         <div className="min-h-screen bg-gray-100">
             <Header></Header>
-
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div className="px-4 py-6 sm:px-0">
                     <Card className="max-w-md mx-auto">
                         <CardHeader>
-                            <CardTitle>Login</CardTitle>
-                            <CardDescription>
-                                Sign in with your email and password
-                            </CardDescription>
+                            <CardTitle>Sign Up</CardTitle>
+                            <CardDescription>Create new account</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            {/* <form onSubmit={handleLogin} className="space-y-4"> */}
+                            {/* <form
+                                onSubmit={handleRegister}
+                                className="space-y-4"
+                            > */}
                             <form className="space-y-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="email">Email</Label>
@@ -52,6 +63,21 @@ export default function LoginPage() {
                                         value={email}
                                         onChange={(e) =>
                                             setEmail(e.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="username">
+                                        Username
+                                    </Label>
+                                    <Input
+                                        id="username"
+                                        type="text"
+                                        placeholder="username"
+                                        value={username}
+                                        onChange={(e) =>
+                                            setUsername(e.target.value)
                                         }
                                         required
                                     />
@@ -68,21 +94,26 @@ export default function LoginPage() {
                                         required
                                     />
                                 </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="confirmPassword">
+                                        Confirm Password
+                                    </Label>
+                                    <Input
+                                        id="confirmPassword"
+                                        type="password"
+                                        value={confirmPassword}
+                                        onChange={(e) =>
+                                            setConfirmPassword(e.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
                                 <Button
                                     type="submit"
                                     className="w-full bg-green-600 hover:bg-white hover:text-black transition ease-in-out duration-200 hover:border"
                                 >
-                                    Sign In
+                                    Submit
                                 </Button>
-                                <div className="text-center">
-                                    Already have an account?
-                                    <Link
-                                        href="/register"
-                                        className="text-blue-500 ms-2"
-                                    >
-                                        Sign Up
-                                    </Link>
-                                </div>
                             </form>
                         </CardContent>
                     </Card>

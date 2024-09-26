@@ -79,7 +79,7 @@ const ProductDetail = () => {
                 <div>
                     <h1 className="text-3xl font-bold mb-4">GOLDEN NIRVANA</h1>
                     <p className="text-2xl font-semibold mb-4">₫ 19.000</p>
-                    <Button className="w-full mb-4">Thêm vào giỏ hàng</Button>
+                    <Button className="w-1/3 py-6 mb-4 bg-green-600 hover:bg-white hover:text-black transition ease-in-out duration-500 hover:border">Thêm vào giỏ hàng</Button>
                     <p className="text-gray-600 mb-4">
                         Còn hàng - Giao hàng: 24h trong TP.HCM
                     </p>

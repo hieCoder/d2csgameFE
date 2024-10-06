@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
 // Assuming you have a registerUser action in your Redux store
 // import { registerUser } from "@/store/authSlice";
@@ -46,7 +47,9 @@ export default function SignUp() {
                     <Card className="max-w-md mx-auto">
                         <CardHeader>
                             <CardTitle>Sign Up</CardTitle>
-                            <CardDescription>Create new account</CardDescription>
+                            <CardDescription>
+                                Create new account
+                            </CardDescription>
                         </CardHeader>
                         <CardContent>
                             {/* <form
@@ -59,7 +62,7 @@ export default function SignUp() {
                                     <Input
                                         id="email"
                                         type="email"
-                                        placeholder="your@email.com"
+                                        placeholder="Enter your email"
                                         value={email}
                                         onChange={(e) =>
                                             setEmail(e.target.value)
@@ -68,13 +71,11 @@ export default function SignUp() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="username">
-                                        Username
-                                    </Label>
+                                    <Label htmlFor="username">Username</Label>
                                     <Input
                                         id="username"
                                         type="text"
-                                        placeholder="username"
+                                        placeholder="Enter your username"
                                         value={username}
                                         onChange={(e) =>
                                             setUsername(e.target.value)
@@ -83,10 +84,11 @@ export default function SignUp() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">Enter your password</Label>
                                     <Input
                                         id="password"
                                         type="password"
+                                        placeholder="Enter your password"
                                         value={password}
                                         onChange={(e) =>
                                             setPassword(e.target.value)
@@ -101,6 +103,7 @@ export default function SignUp() {
                                     <Input
                                         id="confirmPassword"
                                         type="password"
+                                        placeholder="Confirm password"
                                         value={confirmPassword}
                                         onChange={(e) =>
                                             setConfirmPassword(e.target.value)
@@ -115,6 +118,15 @@ export default function SignUp() {
                                     Submit
                                 </Button>
                             </form>
+                            <div className="text-center mt-4">
+                                Already have an account?
+                                <Link
+                                    href="/login"
+                                    className="text-blue-500 ms-2"
+                                >
+                                    Log In
+                                </Link>
+                            </div>
                         </CardContent>
                     </Card>
                 </div>

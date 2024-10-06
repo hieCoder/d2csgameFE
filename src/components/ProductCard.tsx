@@ -11,7 +11,7 @@ const generateProducts = (total: number) => {
     id: i + 1,
     name: `Product ${i + 1}`,
     price: Math.floor(Math.random() * 500) + 20,
-    image: '/placeholder.svg?height=200&width=200',
+    image: '/images/game.png',
   }))
 }
 

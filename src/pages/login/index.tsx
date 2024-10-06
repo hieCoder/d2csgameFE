@@ -48,7 +48,7 @@ export default function LoginPage() {
                                     <Input
                                         id="email"
                                         type="email"
-                                        placeholder="your@email.com"
+                                        placeholder="Enter your email"
                                         value={email}
                                         onChange={(e) =>
                                             setEmail(e.target.value)
@@ -61,6 +61,7 @@ export default function LoginPage() {
                                     <Input
                                         id="password"
                                         type="password"
+                                        placeholder="Enter your password"
                                         value={password}
                                         onChange={(e) =>
                                             setPassword(e.target.value)
@@ -77,7 +78,7 @@ export default function LoginPage() {
                                 <div className="text-center">
                                     Already have an account?
                                     <Link
-                                        href="/register"
+                                        href="/signup"
                                         className="text-blue-500 ms-2"
                                     >
                                         Sign Up

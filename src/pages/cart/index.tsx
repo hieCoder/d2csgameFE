@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Header from "@/components/Header";
-import FooterIcon from "@/components/FooterIcon";
+import Header from "@/components/features/Header";
+import FooterIcon from "@/components/features/FooterIcon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";

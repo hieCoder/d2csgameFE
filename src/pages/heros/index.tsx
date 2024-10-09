@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import FooterIcon from "@/components/FooterIcon";
-import Header from "@/components/Header";
+import FooterIcon from "@/components/features/FooterIcon";
+import Header from "@/components/features/Header";
 
 export default function Heros() {
     // This would typically come from an API or database

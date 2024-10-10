@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "@/store/productSlice";
+import { loadProducts } from "@/store/slices/productSlice";
 import { RootState, AppDispatch } from "@/store/store";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";

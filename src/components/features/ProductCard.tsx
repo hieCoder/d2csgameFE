@@ -9,13 +9,15 @@ interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
+    console.log(product.image?.filePath);
+    
     return (
         <div
             key={product.id}
             className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
         >
             <Image
-                src={product.image.filePath  }
+                src={product.image?.filePath}
                 alt={product.name}
                 width={150}
                 height={150}

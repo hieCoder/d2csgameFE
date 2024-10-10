@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "@/store/productSlice";
-import { RootState, AppDispatch } from "@/store/store";
-import ProductCard from "./ProductCard";
+import { fetchProducts } from "@/store/slices/productSlice";
+import { RootState } from "@/store/store";
 import ErrorModal from "../ui/ErrorModalProps";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProductItem } from "@/types/product";
+import { PaginationRequest, ProductItem } from "@/types/product";
+import ProductCard from "./ProductCard";
 
 /*
         {sideProducts.map((product, index) => (
@@ -52,89 +52,62 @@ import { ProductItem } from "@/types/product";
 */
 
 // Component hiển thị danh sách sản phẩm
-export default function ProductList() {
-    const dispatch = useDispatch<AppDispatch>(); // Hook để dispatch actions
-    const { products, loading, error, paginaton } = useSelector(
-        (state: RootState) => state.products
-    ); // Hook để chọn state từ store
-    const [showError, setShowError] = useState(false); // State để quản lý việc hiển thị modal lỗi
+const ProductList: React.FC = () => {
+    const dispatch = useDispatch();
+    const { items, status, error, page, size, hasNext, hasPrevious } = useSelector((state: RootState) => state.product);
 
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const pageSize = paginaion.size;
-    /**
-     * useEffect để load danh sách sản phẩm khi component được mount.
-     */
-    useEffect(() => {
-        dispatch(loadProducts({page})); // Dispatch action để load sản phẩm
-    }, [dispatch]);
+    const showError = !!error;
 
     useEffect(() => {
-        if (error) {
-            setShowError(true); // Hiển thị modal lỗi
+        const paginationRequest: PaginationRequest = { page, size, sort: ["name"] };
+        dispatch(fetchProducts(paginationRequest) as any);
+    }, [dispatch, page, size]);
+
+    const handlePreviousPage = () => {
+        if (hasPrevious) {
+            dispatch(fetchProducts({ page: page - 1, size, sort: ["name"] }) as any); // Gọi API với page giảm
         }
-    }, [error]);
+    };
 
-    const handleCloseError = () => setShowError(false);
-
-    // Hiển thị thông báo khi đang tải dữ liệu
-    if (loading) return <p className="text-center mt-4">Loading Products...</p>;
+    const handleNextPage = () => {
+        if (hasNext) {
+            dispatch(fetchProducts({ page: page + 1, size, sort: ["name"] }) as any); // Gọi API với page tăng
+        }
+    };
 
     return (
         <div className="container mx-auto px-20 py-8">
-            {showError && (
-                <ErrorModal
-                    message={error || "Uknown error"}
-                    onClose={handleCloseError}
-                />
-            )}
-            <h2 className="text-2xl font-bold mb-6 text-center">
-                Product List
-            </h2>
+            {showError && <ErrorModal message={error || "Unknown error"} onClose={() => dispatch({ type: "CLEAR_ERROR" })} />}
+            <h2 className="text-2xl font-bold mb-6 text-center">Product List</h2>
 
-            {/* Layout chia 2 khung với tỷ lệ 7:3 */}
             <div className="flex justify-center gap-4">
-                {/* Khung bên trái (chiếm 30%, ẩn trên màn hình nhỏ hơn 1024px) */}
+                {/* Khung bên trái (Top Picks) */}
                 <div className="hidden lg:block w-3/10 max-w-[30%] p-4 bg-gray-50 rounded-lg">
                     <h3 className="text-lg font-bold mb-4">Top Picks</h3>
                     <div className="space-y-4"></div>
                 </div>
 
-                {/* Khung bên phải (chiếm 70%) */}
+                {/* Khung bên phải (Danh sách sản phẩm) */}
                 <div className="w-full lg:w-7/10 p-4 bg-gray-100 rounded-lg">
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {products.map((product: ProductItem) => (
-                            // Sử dụng component ProductCard để hiển thị từng sản phẩm
+                        {items.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
-                        {/* {currentProducts.map((product) => (
-                            <div
-                                key={product.id}
-                                className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
-                            >
-                                <Image
-                                    src={product.image}
-                                    alt={product.name}
-                                    width={150}
-                                    height={150}
-                                    className="w-full h-32 object-cover"
-                                />
-                                <div className="p-2 flex-grow">
-                                    <h3 className="font-semibold text-md mb-1">
-                                        {product.name}
-                                    </h3>
-                                    <p className="text-gray-600 mb-3 text-sm">
-                                        ${product.price.toFixed(2)}
-                                    </p>
-                                    <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md">
-                                        <ShoppingCart className="mr-2 h-4 w-4" />{" "}
-                                        Add to Cart
-                                    </Button>
-                                </div>
-                            </div>
-                        ))} */}
+                    </div>
+
+                    {/* Pagination */}
+                    <div className="flex justify-between mt-4">
+                        <Button onClick={handlePreviousPage} disabled={!hasPrevious} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
+                            Previous
+                        </Button>
+                        <Button onClick={handleNextPage} disabled={!hasNext} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
+                            Next
+                        </Button>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
+
+export default ProductList;

@@ -51,3 +51,20 @@ export interface ListProduct {
     hasNext: boolean;
     hasPrevious: boolean;
 }
+
+// Iterface phân trang
+export interface PaginationRequest {
+    page: number;
+    size: number;
+    sort: string[];
+}
+
+// Interface cho PaginationResponse
+export interface PaginationResponse<T> {
+    page: number;
+    size: number;
+    total: number;
+    items: T[];
+    hasNext: boolean;
+    hasPrevious: boolean;
+}

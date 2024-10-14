@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         // Provider cung cấp Redux store cho toàn bộ ứng dụng
         <Provider store={store}>
             {/* Component cụ thể của từng trang */}
-            <Component {...pageProps} />
+            <Component {...pageProps} className="bg-grey-300"/>
         </Provider>
     );
 }
